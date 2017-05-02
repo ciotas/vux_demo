@@ -6,8 +6,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { Loading } from 'vux'
 import { mapState } from 'vuex'
+import { AjaxPlugin } from 'vux'
+Vue.use(AjaxPlugin)
+
+
 export default {
   name: 'app',
   components: {
@@ -17,7 +22,13 @@ export default {
     ...mapState({
       isLoading: state => state.vux.isLoading
     })
-  }
+  },
+  mounted(){
+    //console.log(this.$http)
+     this.$http.get('http://laravel.dev/api/tasks').then((response) => {
+          console.log(response.data)
+      })
+  },
 }
 </script>
 
